@@ -41,11 +41,12 @@
       var jogadaUsuario = prompt(
         "O que voce deseja jogar? 1 = pedra, 2 = papel, 3 = tesoura"
       )
-      var jogadaUsuarioConvertida = Number(jogadaUsuario);
-      var jogadaScript = 2
+      var jogadaUsuarioConvertida = Number(jogadaUsuario)
+      var jogadaScript = Math.floor(Math.random() * 3) + 1
 
       console.log('Jogada usuario: ' + jogadaUsuarioConvertida)
       console.log('Jogada script: ' + jogadaScript)
+
 
       if (jogadaUsuarioConvertida === jogadaScript) {
 
@@ -53,20 +54,20 @@
 
       } else {
 
-        if (jogadaUsuarioConvertida === 1) {
+        if(jogadaUsuarioConvertida === 1) {
 
-          if (jogadaScript === 2) {
+            if(jogadaScript === 2) {
 
-            alert("Voce perdeu")
+                alert('Voce perdeu')
 
-          } else {
+            } else {
 
-            alert("Voce ganhou")
+                alert('Voce ganhou')
 
-          }
+            }
 
         }
-
+        
       }
 
     </script>
