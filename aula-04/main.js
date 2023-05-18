@@ -35,7 +35,7 @@
 //   console.log(user);
 //   console.log(users);
 
-// Obtendo um elemento do DOM da pior maneira possival
+// Obtendo um elemento do DOM da pior maneira possivel
 const valorTitulo = document.children[0].children[1].children[0];
 
 // Obtendo o mesmo elemento do DOM de uma maneira bem mais facil
