@@ -4,10 +4,27 @@
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+  transition: .2s ease-in-out;
 }
 
 body {
   background-color: rgb(219, 219, 219);
+}
+
+.switch-theme-button {
+
+  padding: 12px 24px;
+  margin: 22px auto;
+  display: block;
+  border: 1px solid;
+  
+}
+
+.dark .switch-theme-button {
+
+  color: white;
+  background-color: #404040;
+
 }
 
 h1 {
@@ -44,32 +61,21 @@ h1 {
   margin-bottom: .2em;
 }
 
-
-
-
-
-.dark-mode-body {
+.dark {
   background-color: rgb(39, 39, 39);
 }
 
-/* 
-
-// Modificações no titulo 'A família dos felinos'
-{ 
+.dark h1 { 
   background-color: rgb(19, 19, 19);
   color: rgb(170, 170, 170);
   border-color: black;
 }
 
-
-// Modificações nos items
-{
+.dark .item{
   background-color: rgb(19, 19, 19);
   border-color: black;
 }
 
-// Modificações nos textos dos itens e cabeçalhos dos itens
-{
+.dark .item {
   color: rgb(230, 230, 230);
 }
-*/
