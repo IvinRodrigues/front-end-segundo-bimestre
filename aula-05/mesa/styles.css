@@ -74,8 +74,5 @@ h1 {
 .dark .item{
   background-color: rgb(19, 19, 19);
   border-color: black;
-}
-
-.dark .item {
   color: rgb(230, 230, 230);
 }
