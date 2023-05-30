@@ -1,0 +1,31 @@
+.form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-control input {
+
+    background-color: #c6c6c6;
+    border: none;
+
+}
+
+.form-control small {
+
+    display: none;
+    color: #e36262;
+
+}
+
+.error input {
+
+    background-color: #e36262;
+
+}
+
+.error small {
+
+    display: block;
+
+}
