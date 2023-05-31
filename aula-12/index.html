@@ -14,10 +14,11 @@
 
         <h1>Login</h1>
 
-        <div class="form-control" id="formControlNome">
+        <div class="form-control">
             <label for="userNameInput">Nome</label>
             <input
                 type="text"
+                name="nickname"
                 required
                 minlength="4"
                 maxlength="25"
@@ -26,7 +27,20 @@
             <small>Por favor, preencha o campo Nome com no minimo 4 caracteres</small>
         </div>
 
-        <div class="form-control" id="formControlPassword">
+        <div class="form-control">
+            <label for="userLastNameInput">Sobrenome</label>
+            <input
+                type="text"
+                name="lastname"
+                required
+                minlength="4"
+                maxlength="25"
+                id="userLastNameInput"
+            >
+            <small>Por favor, preencha o campo Sobrenome com no minimo 4 caracteres</small>
+        </div>
+
+        <div class="form-control">
             <label for="userPasswordInput">Senha</label>
             <input
                 type="password"
@@ -38,7 +52,11 @@
             <small>Por favor, preencha o campo Senha com no minimo 8 caracteres</small>
         </div>
 
-        <button type="submit" id="loginButton">Entrar</button>
+        <button
+            disabled
+            type="submit"
+            id="loginButton"
+        >Entrar</button>
 
     </form>
 

@@ -1,24 +1,23 @@
-const formControlNameRef = document.querySelector('#formControlNome')
 const userNameInputRef = document.querySelector('#userNameInput')
-
-const formControlPasswordRef = document.querySelector('#formControlPassword')
+const userLastNameInputRef = document.querySelector('#userLastNameInput')
 const userPasswordInputRef = document.querySelector('#userPasswordInput')
-
 const loginButtonRef = document.querySelector('#loginButton')
 
 var formErrors = {
-    name: true,
+    nickname: true,
+    lastname: true,
     password: true
 }
 
 var user = {
-    name: '',
+    nickname: '',
+    lastname: '',
     password: ''
 }
 
 function disableButtonIfFormHasErrors() {
 
-    if(!formErrors.name && !formErrors.password) {
+    if(!formErrors.nickname && !formErrors.lastname && !formErrors.password) {
 
         loginButtonRef.disabled = false
 
@@ -30,51 +29,24 @@ function disableButtonIfFormHasErrors() {
 
 }
 
-function validateUserPassword(event) {
+function validateInput(event) {
 
     const target = event.target
     const value = target.value
+    const parent = target.parentNode
     const isValid = target.checkValidity()
 
-    user.password = value
+    user[target.name] = value
 
     if(isValid) {
 
-        target.parentNode.classList.remove('error')
-        formErrors.password = false
-        console.log('Valor valido')
+        parent.classList.remove('error')
+        formErrors[target.name] = false
 
     } else {
 
-        target.parentNode.classList.add('error')
-        formErrors.password = true
-        console.log('Valor invalido')
-
-    }
-
-    disableButtonIfFormHasErrors()
-
-}
-
-function validateUserName(event) {
-
-    const target = event.target
-    const value = target.value
-    const isValid = target.checkValidity()
-
-    user.name = value
-
-    if(isValid) {
-
-        formControlNameRef.classList.remove('error')
-        formErrors.name = false
-        console.log('Valor valido')
-
-    } else {
-
-        formControlNameRef.classList.add('error')
-        formErrors.name = true
-        console.log('Valor invalido')
+        parent.classList.add('error')
+        formErrors[target.name] = true
 
     }
     
@@ -90,7 +62,8 @@ function login(event) {
 
 }
 
-userNameInputRef.addEventListener('keyup', (event) => validateUserName(event))
-userPasswordInputRef.addEventListener('keyup', (event) => validateUserPassword(event))
+userNameInputRef.addEventListener('keyup', (event) => validateInput(event))
+userLastNameInputRef.addEventListener('keyup', (event) => validateInput(event))
+userPasswordInputRef.addEventListener('keyup', (event) => validateInput(event))
 
 loginButtonRef.addEventListener('click', (event) => login(event))
