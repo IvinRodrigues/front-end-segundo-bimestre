@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    transition: .2s ease-in-out;
+
+}
+
+body {
+
+    min-height: 100vh;
+    background-color: #202020;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form {
+
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0 auto;
+    padding: 120px 60px;
+    background-color: #222222;
+    border-radius: 12px;
+
+}
+
+.form-control {
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+.form-control label {
+
+    font-size: 14px;
+    opacity: .8;
+
+}
+
+.form-control input {
+
+    background-color: #282828;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 20px;
+
+}
+
+.form-control small {
+
+    opacity: 0;
+    color: #e36262;
+
+}
+
+.error input {
+
+    background-color: #e36262;
+
+}
+
+.error small {
+
+    opacity: .8;
+
+}
+
+form button {
+
+    padding: 18px 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #2ac166;
+    font-size: 18px;
+
+}
+
+form button:hover {
+
+    cursor: pointer;
+    background-color: #42ee87;
+    transform: scale(1.02);
+
+}
+
+form button:disabled {
+
+    opacity: .4;
+    transform: scale(.98);
+
+}
+
+form button:disabled:hover {
+
+    background-color: #2ac166;
+    cursor: not-allowed;
+    transform: scale(.98);
+
+}
