@@ -36,7 +36,7 @@ function validateInput(event) {
     const parent = target.parentNode
     const isValid = target.checkValidity()
 
-    user[target.name] = value
+    user[target.name] = value.trim()
 
     if(isValid) {
 
@@ -65,5 +65,4 @@ function login(event) {
 userNameInputRef.addEventListener('keyup', (event) => validateInput(event))
 userLastNameInputRef.addEventListener('keyup', (event) => validateInput(event))
 userPasswordInputRef.addEventListener('keyup', (event) => validateInput(event))
-
 loginButtonRef.addEventListener('click', (event) => login(event))
