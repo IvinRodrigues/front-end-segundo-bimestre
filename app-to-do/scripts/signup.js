@@ -1,6 +1,8 @@
 const apiBaseUrl = 'https://todo-api.ctd.academy/v1'
 const buttonSubmitRef = document.querySelector('#buttonSubmit')
 
+const emailInputRef = document.querySelector('#emailInput')
+
 var user = {
     firstName: "Ivin",
     lastName: "Rodrigues",
@@ -37,3 +39,9 @@ function createUser(event) {
 }
 
 buttonSubmitRef.addEventListener('click', event => createUser(event))
+
+emailInputRef.addEventListener('keyup', event => {
+
+    console.log(event.target.checkValidity())
+
+})

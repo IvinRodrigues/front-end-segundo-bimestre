@@ -29,7 +29,12 @@
 
       <label>
         Nome:
-        <input type="text">
+        <input
+          type="text"
+          required
+          minlength="4"
+          max="40"
+        >
       </label>
       <label>
         Sobrenome:
@@ -37,7 +42,12 @@
       </label>
       <label>
         Email:
-        <input type="email">
+        <input
+          type="email"
+          required
+          minlength="6"
+          id="emailInput"
+        >
       </label>
       <label>
         Senha:
