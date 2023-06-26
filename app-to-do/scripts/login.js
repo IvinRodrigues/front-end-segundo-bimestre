@@ -23,11 +23,10 @@ function authUser(event) {
 
     fetch(`${apiBaseUrl}/users/login`, requestSettings).then(
         response => {
-            console.log(response)
             if(response.ok) {
                 response.json().then(
-                    jwt => {
-                        localStorage.setItem('jwt', jwt.jwt)
+                    data => {
+                        localStorage.setItem('jwt', data.jwt)
                         window.location.href = 'tarefas.html'
                     }
                 )
