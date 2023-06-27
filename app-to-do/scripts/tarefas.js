@@ -18,7 +18,7 @@ const requestHeadersAuth = {
 }
 
 // Objeto que armazenara todas as Tarefas, divididas em dois arrays
-var tasks = {
+var userTasks = {
     openeds : [], // Array utilizado para armazenar as nossas tarefas em aberto
     closeds: [] // Array utilizado para armazenar as nossas tarefas concluidas
 }
@@ -33,14 +33,56 @@ function logOut() {
 
 }
 
+function deleteTask(task) {
+
+}
+
+function completeTask(task) {
+
+    let taskCompleted = task
+    // console.log(taskCompleted)
+    taskCompleted.completed = true
+    // console.log(taskCompleted)
+
+    const requestSettings = {
+        method: 'PUT',
+        body: JSON.stringify(taskCompleted),
+        headers: requestHeadersAuth
+    }
+
+    fetch(`${apiBaseUrl}/tas1ks/${task.id}`, requestSettings).then(
+        response => {
+            if(response.ok) {
+                getTasks()
+            }
+        }
+    )
+
+}
+
+function addEventListenersToTasks() {
+
+    // console.log(openTasksListRef.children)
+    const openTaskListItensRef = Array.from(openTasksListRef.children)
+
+    openTaskListItensRef.map(
+        (item, index) => {
+            const actionItemTaskRef = item.children[0]
+            const taskFinded = userTasks.openeds[index]
+            actionItemTaskRef.addEventListener('click', () => completeTask(taskFinded))
+        }
+    )
+
+}
+
 // Funcao que ira inserir as nossas Tasks no HTML
-function insertTasksHtml(tasks) {
+function insertTasksHtml() {
 
     // Remocao de todos os elementos dentro da Lista de Tarefas em Aberto
     openTasksListRef.innerHTML = ''
 
     // For nas tarefas para inseri-las no HTML
-    for(let task of tasks) {
+    for(let task of userTasks.openeds) {
 
         // Criacao de uma data baseada na string retornada da API
         const taskDate = new Date(task.createdAt)
@@ -59,12 +101,36 @@ function insertTasksHtml(tasks) {
 
     }
 
+    addEventListenersToTasks()
+
+}
+
+function checkTasks(tasks) {
+
+    for(let task of tasks) {
+
+        if(task.completed) {
+
+            userTasks.closeds.push(task)
+
+        } else {
+
+            userTasks.openeds.push(task)
+
+        }
+
+    }
+
+    // Caso tenha dado tudo certo com a Request, nos chamamos a funcao para inserir as Tasks no HTML
+    setTimeout(() => insertTasksHtml(), 1000)
+    // insertTasksHtml()
+
 }
 
 // Funcao que ira obter as Tarefas
 function getTasks() {
 
-    // Ibjeto de Configuracao da Request
+    // Objeto de Configuracao da Request
     const requestSettings = {
         method: 'GET',
         headers: requestHeadersAuth
@@ -77,8 +143,7 @@ function getTasks() {
             if(response.ok) {
                 response.json().then(
                     tasks => {
-                        
-                        setTimeout(() => insertTasksHtml(tasks), 1000)
+                        checkTasks(tasks)
                     }
                 )
             } else {
@@ -94,7 +159,7 @@ function getTasks() {
 }
 
 // Funcao que ira criar uma nova Task
-function createTask(event) {
+async function createTask(event) {
 
     // Utilizacao do preventDefault() para a pagina nao recarregar apos o Submit
     event.preventDefault()
@@ -102,7 +167,7 @@ function createTask(event) {
     // Objeto contendo a Task que sera Cadastrada
     const task = {
         // Descricao da Task(Essa descericao deve conter o valor do Input que o usuario digitou, ela esta fixa com essa String apenas para entendermos como a requisicao funciona)
-        description: 'Finalizar App To-Do',
+        description: 'Teste',
         // Completed representa se a Task sera criada como Aberta ou Finalizada
         // False ira significar que esta em abera
         // True ira significar que esta finalizada
@@ -118,17 +183,16 @@ function createTask(event) {
     }
 
     // Request para cadastrar uma nova tarefa
-    fetch(`${apiBaseUrl}/tasks`, requestSettings).then(
-        response => {
-            // Verificacao se deu tudo certo com a Request
-            if(response.ok) {
-                // Caso tenha dado tudo certo nos executamos a funcao getTasks() novamente
-                // A ideia de executarmos novamente a getTasks() esta em "remontarmos as listas pata o usuario"
-                // Toda vez que fazemos uma requisicao para criarmos uma nova tarefa, ela no final das contas é criada no Banco de Dados, porem, a listagem que esta sendo mostrada para o usuario nao contem essa nova tarefa criada. Por isso que precisamos obter as tarefas novamente
-                getTasks()
-            }
-        }
-    )
+    const response = await fetch(`${apiBaseUrl}/tasks`, requestSettings)
+
+    // Verificacao se deu tudo certo com a Request
+    if(response.ok) {
+        // Caso tenha dado tudo certo nos executamos a funcao getTasks() novamente
+        // A ideia de executarmos novamente a getTasks() esta em "remontarmos as listas pata o usuario"
+        // Toda vez que fazemos uma requisicao para criarmos uma nova tarefa, ela no final das contas é criada no Banco de Dados, porem, a listagem que esta sendo mostrada para o usuario nao contem essa nova tarefa criada. Por isso que precisamos obter as tarefas novamente
+        getTasks()
+    }
+    
 
 }
 
