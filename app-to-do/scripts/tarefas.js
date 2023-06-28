@@ -35,6 +35,8 @@ function logOut() {
 
 function deleteTask(task) {
 
+    // construir a request de Delete aqui :)
+
 }
 
 function completeTask(task) {
@@ -50,7 +52,7 @@ function completeTask(task) {
         headers: requestHeadersAuth
     }
 
-    fetch(`${apiBaseUrl}/tas1ks/${task.id}`, requestSettings).then(
+    fetch(`${apiBaseUrl}/tasks/${task.id}`, requestSettings).then(
         response => {
             if(response.ok) {
                 getTasks()
@@ -62,7 +64,7 @@ function completeTask(task) {
 
 function addEventListenersToTasks() {
 
-    // console.log(openTasksListRef.children)
+    // Logica para adicionar os Event Listeners para a Lista de Tarefas Abertas
     const openTaskListItensRef = Array.from(openTasksListRef.children)
 
     openTaskListItensRef.map(
@@ -73,10 +75,15 @@ function addEventListenersToTasks() {
         }
     )
 
+
+    // Contrua aqui a Logica para adicionar os Event Listeners para a Lista de Tarefas Concluidas
+
 }
 
 // Funcao que ira inserir as nossas Tasks no HTML
 function insertTasksHtml() {
+
+    // Logica para inserir as Tarefas Abertas na Lista de Tarefas Abertas no HTML
 
     // Remocao de todos os elementos dentro da Lista de Tarefas em Aberto
     openTasksListRef.innerHTML = ''
@@ -101,20 +108,28 @@ function insertTasksHtml() {
 
     }
 
+    // Construa aqui a Logica para inserir as Tarefas Concluidas na Lista de Tarefas Concluidas no HTML
+    // Muito importante que a logica esteja antes da Funcao addEventListenersToTasks()
+
     addEventListenersToTasks()
 
 }
 
+// Funcao que ira checar e separar as nossas Task em dois grupos, Aberas e Finalizadas
 function checkTasks(tasks) {
 
+    // For para percorrer as terfas
     for(let task of tasks) {
 
+        // Verificacao para ver se ela ja esta Finalizada
         if(task.completed) {
 
+            // Caso esteja ela sera armazenada no Array "closeds" dentro do Objeto "userTasks"
             userTasks.closeds.push(task)
 
         } else {
 
+            // Caso a tarefas esteja Aberta ela sera armazenada no Array "openeds" dentro do Objeto "userTasks"
             userTasks.openeds.push(task)
 
         }
@@ -135,6 +150,9 @@ function getTasks() {
         method: 'GET',
         headers: requestHeadersAuth
     }
+
+    // userTasks.closeds = []
+    // userTasks.openeds = []
 
     // Request para obter as tarefas
     fetch(`${apiBaseUrl}/tasks`, requestSettings).then(
@@ -167,7 +185,7 @@ async function createTask(event) {
     // Objeto contendo a Task que sera Cadastrada
     const task = {
         // Descricao da Task(Essa descericao deve conter o valor do Input que o usuario digitou, ela esta fixa com essa String apenas para entendermos como a requisicao funciona)
-        description: 'Teste',
+        description: 'Teste', // Inserir aqui o valor do Input que o usuario digitou
         // Completed representa se a Task sera criada como Aberta ou Finalizada
         // False ira significar que esta em abera
         // True ira significar que esta finalizada
