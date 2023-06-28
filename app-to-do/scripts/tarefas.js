@@ -62,6 +62,7 @@ function completeTask(task) {
 
 }
 
+// Funcao que ira adicionar os Events Listeners nos Itens do HTML
 function addEventListenersToTasks() {
 
     // Logica para adicionar os Event Listeners para a Lista de Tarefas Abertas
@@ -142,6 +143,15 @@ function checkTasks(tasks) {
 
 }
 
+// Funcao para limpar as tarefas
+function clearTasks() {
+
+    // Limpando o Array de tarefas colocando o valor dos mesmos como um Array vazio "[]"
+    userTasks.closeds = []
+    userTasks.openeds = []
+
+}
+
 // Funcao que ira obter as Tarefas
 function getTasks() {
 
@@ -151,8 +161,7 @@ function getTasks() {
         headers: requestHeadersAuth
     }
 
-    // userTasks.closeds = []
-    // userTasks.openeds = []
+    clearTasks()
 
     // Request para obter as tarefas
     fetch(`${apiBaseUrl}/tasks`, requestSettings).then(
@@ -185,7 +194,7 @@ async function createTask(event) {
     // Objeto contendo a Task que sera Cadastrada
     const task = {
         // Descricao da Task(Essa descericao deve conter o valor do Input que o usuario digitou, ela esta fixa com essa String apenas para entendermos como a requisicao funciona)
-        description: 'Teste', // Inserir aqui o valor do Input que o usuario digitou
+        description: 'Teste 4', // Inserir aqui o valor do Input que o usuario digitou
         // Completed representa se a Task sera criada como Aberta ou Finalizada
         // False ira significar que esta em abera
         // True ira significar que esta finalizada
